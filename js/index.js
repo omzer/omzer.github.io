@@ -1,5 +1,5 @@
-
 const auth = firebase.auth();
+
 // Go to sign in page if not signed in -- use it in all forms
 auth.onAuthStateChanged(user => {
     if (!user) {
@@ -23,9 +23,14 @@ function loadData(user) {
     firebase.database().ref().child('top3').on('value', snap => {
         var x = snap.val();
 
-        $('#one').attr('href',x.one);
-        $('#two').attr('href',x.two);
-        $('#three').attr('href',x.three);
+        document.getElementById('one').innerText = x[0].title;
+        $('#one').attr('href', x[0].link);
+        
+        document.getElementById('two').innerText = x[1].title;
+        $('#two').attr('href', x[1].link);
+        
+        document.getElementById('three').innerText = x[2].title;
+        $('#three').attr('href', x[2].link);
 
 
     });
